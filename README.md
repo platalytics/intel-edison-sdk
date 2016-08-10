@@ -1,10 +1,9 @@
-# Arduino Yún SDK
+# Intel Edison SDK
 
 Before you dive into setting up the SDK for your device, follow instructions below.
 
-1. Expand disk space using https://www.arduino.cc/en/Tutorial/ExpandingYunDiskSpace
-2. You need a Linux based environment (Mac works too) to setup
-3. Make sure you have `expect` utility installed
+1. You need a Linux based environment (Mac works too) to setup
+2. Make sure you have `expect` utility installed
 
     Get `expect` on Ubuntu/Debian
         
@@ -27,8 +26,5 @@ Run deployment script
 Example
     
     $ ./deploy -i 192.168.1.X -u root -p arduino -s 22 -d KEY -f [url]
-
-
-This does everything in one go. Sets up protocol libraries and installs required dependencies on Arduino board. The next thing you need to do is to upload sketch program to your Arduino board.
 
 You can find example sketch programs in `examples/` folder.
