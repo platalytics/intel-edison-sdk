@@ -1,11 +1,12 @@
-# Intel Edison SDK
+# Arduino Yún SDK
 
-Before you dive into setting up the SDK for your device there are some instructions that need to be followed along.
+Before you dive into setting up the SDK for your device, follow instructions below.
 
-1. You need a `linux`-based environment to setup
-2. Make sure you have `expect` utility installed
+1. Expand disk space using https://www.arduino.cc/en/Tutorial/ExpandingYunDiskSpace
+2. You need a Linux based environment (Mac works too) to setup
+3. Make sure you have `expect` utility installed
 
-    Get on **Ubuntu** executing following command in terminal
+    Get `expect` on Ubuntu/Debian
         
         $ sudo apt-get install expect
 
@@ -15,8 +16,19 @@ Add execution permissions to script `deploy.sh`
 
 Run deployment script
 
-    $ ./deploy.sh <board-ip> <board-username> <board-password> <device-key> <host> <api-key>
+    $ ./deploy.sh -<option1> <value1> ...
+	    -i IP address
+        -u username having root access
+        -p password of specified username
+        -s SSH port
+        -d device ID/key generated from Platalytics Platform
+        -f frontend host
 
-This does everything in one go. Sets up protocol libraries and installs required dependencies on Intel Edison board.
+Example
+    
+    $ ./deploy -i 192.168.1.X -u root -p arduino -s 22 -d KEY -f [url]
+
+
+This does everything in one go. Sets up protocol libraries and installs required dependencies on Arduino board. The next thing you need to do is to upload sketch program to your Arduino board.
 
 You can find example sketch programs in `examples/` folder.
