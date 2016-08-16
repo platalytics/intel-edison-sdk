@@ -46,10 +46,15 @@ expect "*~#" { send "echo ${device_id}controlcallback 1>/root/controls.conf\r" }
 
 # adding bootloader entries
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"5\"}' ${frontend_host}\r" }
-expect "*~#" { send "cat /root/core/bootloader/entry 1>/etc/rc.local\r" }
-expect "*~#" { send "echo 'nohup python /root/core/logger/logger_daemon.py &' >> /etc/rc.local\r" }
-expect "*~#" { send "echo 'nohup python /root/core/controls/controls_daemon.py &' >> /etc/rc.local\r" }
-expect "*~#" { send "echo 'exit 0' >> /etc/rc.local\r" }
+
+#expect "*~#" { send "cat /root/core/bootloader/entry 1>/etc/rc.local\r" }
+#expect "*~#" { send "echo 'nohup python /root/core/logger/logger_daemon.py &' >> /etc/rc.local\r" }
+#expect "*~#" { send "echo 'nohup python /root/core/controls/controls_daemon.py &' >> /etc/rc.local\r" }
+#expect "*~#" { send "echo 'exit 0' >> /etc/rc.local\r" }
+
+expect "*~#" { send "cat /root/core/bootloader/entry.sh 1>/etc/init.d/script.sh\r"}
+expect "*~#" { send "chmod 775 /etc/init.d/script.sh\r"}
+expect "*~#" { send "update-rc.d /etc/init.d/script.sh defaults" }
 
 # cleaning up
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"6\"}' ${frontend_host}\r" }
