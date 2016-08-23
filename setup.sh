@@ -47,14 +47,12 @@ expect "*~#" { send "echo ${device_id}controlcallback 1>/root/controls.conf\r" }
 # adding bootloader entries
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"5\"}' ${frontend_host}\r" }
 
-#expect "*~#" { send "cat /root/core/bootloader/entry 1>/etc/rc.local\r" }
-#expect "*~#" { send "echo 'nohup python /root/core/logger/logger_daemon.py &' >> /etc/rc.local\r" }
-#expect "*~#" { send "echo 'nohup python /root/core/controls/controls_daemon.py &' >> /etc/rc.local\r" }
-#expect "*~#" { send "echo 'exit 0' >> /etc/rc.local\r" }
-
-expect "*~#" { send "cat /root/core/bootloader/entry.sh 1>/etc/init.d/script.sh\r"}
-expect "*~#" { send "chmod 775 /etc/init.d/script.sh\r"}
-expect "*~#" { send "update-rc.d script.sh defaults\r" }
+expect "*~#" { send "mv /root/core/bootloader/logger.service /lib/systemd/system/logger.service\r"}
+expect "*~#" { send "chmod 644 /lib/systemd/system/hue-light-control.service\r"}
+expect "*~#" { send "chown root:root /lib/systemd/system/hue-light-control.service\r"}
+expect "*~#" { send "systemctl daemon-reload\r"}
+expect "*~#" { send "systemctl enable logger.service\r"}
+expect "*~#" { send "systemctl start logger.service\r"}
 
 # cleaning up
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"6\"}' ${frontend_host}\r" }
@@ -66,6 +64,5 @@ expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"d
 
 # completion ack
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"8\"}' ${frontend_host}\r" }
-expect "*~#" { send "reboot\r" }
 
 interact
