@@ -48,8 +48,8 @@ expect "*~#" { send "echo ${device_id}controlcallback 1>/root/controls.conf\r" }
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"5\"}' ${frontend_host}\r" }
 
 expect "*~#" { send "mv /root/core/bootloader/logger.service /lib/systemd/system/logger.service\r"}
-expect "*~#" { send "chmod 644 /lib/systemd/system/hue-light-control.service\r"}
-expect "*~#" { send "chown root:root /lib/systemd/system/hue-light-control.service\r"}
+expect "*~#" { send "chmod 644 /lib/systemd/system/logger.service\r"}
+expect "*~#" { send "chown root:root /lib/systemd/system/logger.service\r"}
 expect "*~#" { send "systemctl daemon-reload\r"}
 expect "*~#" { send "systemctl enable logger.service\r"}
 expect "*~#" { send "systemctl start logger.service\r"}
