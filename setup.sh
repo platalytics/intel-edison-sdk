@@ -64,6 +64,6 @@ expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"d
 
 # completion ack
 expect "*~#" { send "curl -H \"Content-Type: application/json\" -X POST -d '{\"device_key\":\"'${device_id}'\",\"status\":\"true\",\"step\":\"8\"}' ${frontend_host}\r" }
-expect "*~#" { send "exit\r" }
+expect "*~#" { send "reboot\r" }
 
 interact
